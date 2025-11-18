@@ -1,0 +1,33 @@
+@echo off
+REM คำเตือน: ไฟล์นี้จะแก้ไขการตั้งค่าระบบ Windows โปรดสำรอง Registry ก่อนใช้งาน
+
+REM ตรวจสอบสิทธิ์ Administrator
+net session >nul 2>&1
+if %errorLevel% neq 0 (
+    echo ต้องรันด้วยสิทธิ์ Administrator
+    echo กดคลิกขวาที่ไฟล์แล้วเลือก "Run as administrator"
+    pause
+    exit /b 1
+)
+
+echo กำลังปรับปรุงประสิทธิภาพของ Cache Manager...
+echo.
+
+REM ตั้งค่า Large System Cache เป็น 1 สำหรับเซิร์ฟเวอร์
+REM สำหรับเกม ควรใช้ค่า 0 (แต่ในที่นี้ปรับแต่งเพื่อไฟล์ที่โหลดบ่อย)
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v LargeSystemCache /t REG_DWORD /d 0 /f >nul 2>&1
+
+REM เพิ่ม I/O Page Lock Limit
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v IoPageLockLimit /t REG_DWORD /d 983040 /f >nul 2>&1
+
+if %errorLevel% equ 0 (
+    echo [สำเร็จ] ปรับปรุง Cache Manager เรียบร้อยแล้ว
+) else (
+    echo [ผิดพลาด] ไม่สามารถตั้งค่าได้
+)
+
+echo.
+echo ⚠️ ต้องรีสตาร์ทเครื่องเพื่อให้การเปลี่ยนแปลงมีผล
+echo.
+echo การตั้งค่าเสร็จสิ้น. กดปุ่มใดก็ได้เพื่อปิดหน้าต่าง...
+pause >nul
