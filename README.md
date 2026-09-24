@@ -1,72 +1,55 @@
-# 🎮 Windows Gaming Optimization Scripts
+# 🎮 KANAO Gaming Optimization Scripts
 
-## 📋 ภาพรวม
+[![Release](https://github.com/adisorn6302565/KANAO-Gaming-Optimization-Scripts/actions/workflows/release.yml/badge.svg)](https://github.com/adisorn6302565/KANAO-Gaming-Optimization-Scripts/actions/workflows/release.yml)
+![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D4)
 
-ชุดสคริปต์ Batch Script สำหรับปรับแต่งระบบ Windows ให้เหมาะสมกับการเล่นเกม โดยเน้นการเพิ่มประสิทธิภาพ ลด Input Lag และลด Ping เพื่อประสบการณ์การเล่นเกมที่ดีที่สุด
+ชุดสคริปต์ `.cmd` 100 ไฟล์ใน 10 หมวด สำหรับปรับ Windows ให้เล่นเกมลื่นขึ้น ลด input lag และลด ping มี **เมนูรวม**, **ขอสิทธิ์ Admin อัตโนมัติ** และ **สำรอง/คืนค่า** ในชุด
 
-**จำนวนไฟล์ทั้งหมด:** 100 ไฟล์  
-**จำนวนหมวดหมู่:** 10 หมวดหมู่  
-**ภาษา:** Batch Script (.cmd)  
-**ระบบปฏิบัติการ:** Windows 10/11  
+> ⚠️ หมวด 06 และ 09 (ปิด Windows Update / Defender / Spectre mitigation / SmartScreen) **ลดความปลอดภัยของเครื่อง** ใช้เฉพาะเมื่อเข้าใจผลกระทบ และสำรองข้อมูลก่อนเสมอ
 
-## ⚠️ คำเตือนสำคัญ
+---
 
-> **⚠️ กรุณาอ่านก่อนใช้งาน**
->
-> - **สำรอง Registry:** ไฟล์เหล่านี้จะแก้ไข Registry ของ Windows โปรดสำรอง Registry ก่อนใช้งาน
-> - **สิทธิ์ Administrator:** ต้องรันด้วยสิทธิ์ Administrator เสมอ
-> - **ความเสี่ยง:** บางไฟล์อาจลดความปลอดภัยของระบบเพื่อแลกกับประสิทธิภาพ
-> - **รีสตาร์ท:** บางการตั้งค่าต้องการรีสตาร์ทเครื่องเพื่อให้มีผล
-> - **ความรับผิดชอบ:** ผู้ใช้ต้องรับผิดชอบต่อการใช้งานเอง
+## 📥 ติดตั้ง
 
-## 📁 โครงสร้างไฟล์
+1. ดาวน์โหลด **`KANAO-Gaming-Scripts.zip`** จาก [**Releases ล่าสุด**](../../releases/latest)
+   (หรือกด **Code → Download ZIP**)
+2. คลิกขวา → **Extract All** ไปที่ไหนก็ได้ (ไม่ต้องติดตั้ง)
+3. ดับเบิลคลิก **`KANAO_Menu.cmd`** → กด **Yes** ที่ UAC
 
-```
-f:\โปรแกรม\cmd\
-├── 01_Game_Resource_Allocation\ (ไฟล์ 1-10)
-├── 02_Network_Ping_Optimization\ (ไฟล์ 11-20)
-├── 03_GPU_Graphics_Performance\ (ไฟล์ 21-30)
-├── 04_Input_Lag_Responsiveness\ (ไฟล์ 31-40)
-├── 05_File_System_Disk_Optimization\ (ไฟล์ 41-50)
-├── 06_Disable_Unnecessary_Services\ (ไฟล์ 51-60)
-├── 07_Gaming_Power_Plan\ (ไฟล์ 61-70)
-├── 08_Visual_Effects_UI_Tweaks\ (ไฟล์ 71-80)
-├── 09_Security_vs_Performance\ (ไฟล์ 81-90)
-├── 10_General_System_Maintenance\ (ไฟล์ 91-100)
-└── README.md
+## 🚀 วิธีใช้
+
+```mermaid
+flowchart LR
+    A[KANAO_Menu.cmd] --> B[00 สำรอง Registry<br/>+ Restore Point]
+    B --> C[เลือกหมวด 01–10]
+    C --> D{รันทีละไฟล์<br/>หรือทั้งหมวด}
+    D --> E[รีสตาร์ท]
+    E --> F{ลื่นขึ้น?}
+    F -->|ใช่| G([เล่นเกม])
+    F -->|ไม่ / มีปัญหา| H[00_Restore_Registry.cmd<br/>หรือ rstrui] --> E
 ```
 
-## 🚀 วิธีการใช้งาน
+- ทุกไฟล์ดับเบิลคลิกรันเดี่ยวได้ จะขอสิทธิ์ Admin เอง
+- ไฟล์สำรองอยู่ที่ `C:\ProgramData\KANAO-Gaming-Scriptsackup-<วันเวลา>`
+- **แนะนำเริ่มจาก:** 01, 02, 04, 07 (ปลอดภัยและเห็นผลชัด) แล้วค่อยพิจารณาหมวดอื่น
 
-### ขั้นตอนการใช้งาน
+## 📁 โครงสร้าง
 
-1. **สำรองข้อมูล**
-   ```cmd
-   # สำรอง Registry (แนะนำ)
-   reg export HKLM\SYSTEM system_backup.reg
-   reg export HKCU current_user_backup.reg
-   ```
-
-2. **เลือกหมวดหมู่ที่ต้องการ**
-   - เลือกหมวดหมู่ตามความต้องการ (เช่น Network สำหรับลด Ping)
-
-3. **รันสคริปต์**
-   - คลิกขวาที่ไฟล์ .cmd → เลือก "Run as administrator"
-   - รอให้สคริปต์ทำงานเสร็จ
-
-4. **รีสตาร์ทเครื่อง** (ถ้าจำเป็น)
-   - บางการตั้งค่าต้องการรีสตาร์ทเพื่อให้มีผล
-
-5. **ทดสอบและปรับแต่ง**
-   - ทดสอบการเล่นเกม
-   - ปรับแต่งเพิ่มเติมตามความต้องการ
-
-### เคล็ดลับการใช้งาน
-
-- **เริ่มจากหมวดพื้นฐาน:** เริ่มจากหมวดที่ 1-3 ก่อน
-- **ทดสอบทีละไฟล์:** อย่ารันทุกไฟล์พร้อมกัน
-- **ตรวจสอบประสิทธิภาพ:** ใช้ Task Manager หรือซอฟต์แวร์วัด FPS
-- **ย้อนกลับการตั้งค่า:** ถ้ามีปัญหา สามารถย้อนกลับได้โดยการแก้ไข Registry
+```text
+KANAO-Gaming-Scripts/
+├── KANAO_Menu.cmd                      # เมนูรวม
+├── 00_Backup_Restore/                  # สำรอง / คืนค่า
+├── 01_Game_Resource_Allocation/        (1-10)
+├── 02_Network_Ping_Optimization/       (11-20)
+├── 03_GPU_Graphics_Performance/        (21-30)
+├── 04_Input_Lag_Responsiveness/        (31-40)
+├── 05_File_System_Disk_Optimization/   (41-50)
+├── 06_Disable_Unnecessary_Services/    (51-60)  ⚠️
+├── 07_Gaming_Power_Plan/               (61-70)
+├── 08_Visual_Effects_UI_Tweaks/        (71-80)
+├── 09_Security_vs_Performance/         (81-90)  ⚠️
+└── 10_General_System_Maintenance/      (91-100)
+```
 
 ## 📚 รายละเอียดหมวดหมู่
 
@@ -210,35 +193,22 @@ f:\โปรแกรม\cmd\
 | 99 | Disable_Customer_Experience_Improvement_Program.cmd | ปิด CEIP |
 | 100 | Optimize_Pagefile_Size.cmd | ปรับแต่ง Pagefile |
 
-## 🔄 การย้อนกลับการตั้งค่า
+## 🔄 คืนค่า
 
-หากต้องการย้อนกลับการตั้งค่า สามารถทำได้โดย:
+1. รัน `00_Backup_Restore _Restore_Registry.cmd` (ใช้ชุดสำรองล่าสุด) แล้วรีสตาร์ท
+2. ถ้ายังไม่หาย: `Win + R` → `rstrui` → เลือก Restore Point **"KANAO Gaming Scripts"**
+3. Services ที่ถูกปิด (หมวด 06) เปิดกลับเองได้ที่ `services.msc` → ตั้ง Startup type เป็น Automatic/Manual
 
-1. **นำเข้าข้อมูลสำรอง Registry**
-   ```cmd
-   reg import system_backup.reg
-   reg import current_user_backup.reg
-   ```
+## 🆕 v2.0
 
-2. **รีสตาร์ทเครื่อง**
-
-3. **ตรวจสอบการตั้งค่า**
-   - เปิด System Properties
-   - ตรวจสอบ Power Plan
-   - ตรวจสอบ Services
-
-## 📞 การสนับสนุน
-
-หากพบปัญหาหรือมีคำถาม สามารถติดต่อได้ที่:
-
-- **ผู้เขียน:** นาย อดิศร รักคล้าย
-- **วันที่สร้าง:** 18 พฤศจิกายน 2568
-- **เวอร์ชัน:** 1.0
+| เดิม | ใหม่ |
+|---|---|
+| ภาษาไทยเป็นตัวอักษรเพี้ยนใน cmd (ไฟล์ UTF-8 แต่ไม่ได้ตั้ง code page) | ทุกไฟล์ใช้ `chcp 65001` |
+| 28 ไฟล์ไม่ตรวจสิทธิ์ Admin → รันแล้วขึ้นว่าสำเร็จ แต่ค่า HKLM ไม่เปลี่ยน | ทุกไฟล์ขอสิทธิ์ Admin อัตโนมัติ (UAC) |
+| ต้องคลิกขวา Run as administrator ทีละไฟล์ | `KANAO_Menu.cmd` เลือกหมวด / รันทั้งหมวดได้ |
+| ให้ผู้ใช้สำรอง Registry เอง | `00_Backup_Restore` สำรอง + Restore Point + คืนค่า |
+| — | ZIP พร้อมใช้ในหน้า Releases (สร้างอัตโนมัติ) |
 
 ## 📜 ใบอนุญาต
 
-โปรเจกต์นี้เป็นโอเพนซอร์ส สามารถใช้งาน แก้ไข และแจกจ่ายได้อย่างเสรี
-
----
-
-> **💡 เคล็ดลับ:** ควรทดสอบการตั้งค่าทีละไฟล์ และตรวจสอบประสิทธิภาพหลังการปรับแต่งแต่ละครั้ง
+ใช้งานได้อิสระ ผู้ใช้รับผิดชอบผลจากการใช้งานเอง

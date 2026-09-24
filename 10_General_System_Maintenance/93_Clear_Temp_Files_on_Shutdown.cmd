@@ -1,4 +1,11 @@
 @echo off
+chcp 65001 >nul
+REM --- KANAO: ขอสิทธิ์ Administrator อัตโนมัติ ---
+net session >nul 2>&1
+if %errorLevel% neq 0 (
+    powershell -NoProfile -Command "Start-Process -FilePath '%~f0' -Verb RunAs"
+    exit /b
+)
 REM คำเตือน: ไฟล์นี้จะแก้ไขการตั้งค่าระบบ Windows โปรดสำรอง Registry ก่อนใช้งาน
 
 echo กำลังล้างไฟล์ Temp อัตโนมัติเมื่อปิดเครื่อง...
