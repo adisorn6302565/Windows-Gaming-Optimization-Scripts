@@ -30,7 +30,7 @@ flowchart LR
 ```
 
 - ทุกไฟล์ดับเบิลคลิกรันเดี่ยวได้ จะขอสิทธิ์ Admin เอง
-- ไฟล์สำรองอยู่ที่ `C:\ProgramData\KANAO-Gaming-Scriptsackup-<วันเวลา>`
+- ไฟล์สำรองอยู่ที่ `C:\ProgramData\KANAO-Gaming-Scripts\backup-<วันเวลา>`
 - **แนะนำเริ่มจาก:** 01, 02, 04, 07 (ปลอดภัยและเห็นผลชัด) แล้วค่อยพิจารณาหมวดอื่น
 
 ## 📁 โครงสร้าง
@@ -195,7 +195,7 @@ KANAO-Gaming-Scripts/
 
 ## 🔄 คืนค่า
 
-1. รัน `00_Backup_Restore _Restore_Registry.cmd` (ใช้ชุดสำรองล่าสุด) แล้วรีสตาร์ท
+1. รัน `00_Backup_Restore\00_Restore_Registry.cmd` (ใช้ชุดสำรองล่าสุด) แล้วรีสตาร์ท
 2. ถ้ายังไม่หาย: `Win + R` → `rstrui` → เลือก Restore Point **"KANAO Gaming Scripts"**
 3. Services ที่ถูกปิด (หมวด 06) เปิดกลับเองได้ที่ `services.msc` → ตั้ง Startup type เป็น Automatic/Manual
 
